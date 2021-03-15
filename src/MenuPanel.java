@@ -11,23 +11,20 @@ public class MenuPanel extends JPanel{
     protected JButton newGameButton;
     protected JButton rulesButton;
     protected JButton exitButton;
-    private JButton startButton;
-    private JTextField playerName;
-    private JTextField parkName;
-    private JLabel nameGame;
+    protected JButton startButton;
+    protected JTextField playerName;
+    protected JTextField parkName;
+    protected JLabel nameGame;
+    protected JPanel rulesContainer;
+    protected JLabel rules;
 
     public MenuPanel(int i) { // int i - we will have 3 start windows, this i represents number of each one
+                             //i = 1 => newgame/rules/exit; i = 2 => player's name/park name/start; i = 3 => game rules
 
         switch (i) {
-            case 1:
-                window1();
-                break;
-            case 2:
-                window2();
-                break;
-            case 3:
-                window3();
-                break;
+            case 1 -> window1();
+            case 2 -> window2();
+            case 3 -> window3();
         }
     }
     private void window1() {
@@ -66,7 +63,7 @@ public class MenuPanel extends JPanel{
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(2,0, 2, 0);
+        gbc.insets = new Insets(5,0, 2, 0);
 
         GridBagConstraints gbc0 = new GridBagConstraints();
         gbc0.gridwidth = GridBagConstraints.REMAINDER;
@@ -88,22 +85,20 @@ public class MenuPanel extends JPanel{
         nameGame.setForeground(new Color(212, 210, 210));
 
         playerName = new JTextField("Player1");
-        playerName.setFont(new Font("Hero",Font.PLAIN,23));
-        playerName.setBackground(new Color(168, 111, 151));
-        playerName.setForeground(new Color(38, 35, 37));
+        playerName.setFont(new Font("Berlin Sans FB",Font.PLAIN,20));
+        playerName.setBackground(new Color(108, 61, 92));
+        playerName.setForeground(new Color(203, 189, 197));
         playerName.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        //playerName.setBorder(null);
 
         parkName = new JTextField("Disneyland-2");
-        parkName.setFont(new Font("Hero",Font.PLAIN,23));
-        parkName.setBackground(new Color(168, 111, 151));
-        parkName.setForeground(new Color(38, 35, 37));
+        parkName.setFont(new Font("Berlin Sans FB",Font.PLAIN,20));
+        parkName.setBackground(new Color(108, 61, 92));
+        parkName.setForeground(new Color(203, 189, 197));
         parkName.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        //parkName.setBorder(null);
 
         startButton = new JButton("START");
         startButton.setPreferredSize(new Dimension(150,50));
-        startButton.setFont(new Font("Bernard MT Condensed",Font.PLAIN,16));
+        startButton.setFont(new Font("Bernard MT Condensed",Font.PLAIN,20));
         startButton.setForeground(new Color(38, 35, 37));
         startButton.setBackground(new Color(168, 111, 151));
 
@@ -111,7 +106,7 @@ public class MenuPanel extends JPanel{
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(0,0, 4, 0);
+        gbc.insets = new Insets(5,0, 4, 0);
 
         GridBagConstraints gbc0 = new GridBagConstraints();
         gbc0.gridwidth = GridBagConstraints.REMAINDER;
@@ -125,5 +120,33 @@ public class MenuPanel extends JPanel{
 
         this.setOpaque(false);
     }
-    private void window3() {}
+    private void window3() {
+        nameGame = new JLabel("Onyx Land");
+        nameGame.setFont(new Font("Bernard MT Condensed",Font.PLAIN,35));
+        nameGame.setForeground(new Color(212, 210, 210));
+
+        rulesContainer = new JPanel();
+
+        rules = new JLabel("<html>rules<br>rules rules rules rules rules rules rules<ul><li>rules</li><li>rules</li><li>rules</li></ul></html>");
+        rules.setFont(new Font("Berlin Sans FB",Font.PLAIN,20));
+        rules.setForeground(new Color(38, 35, 37));
+        rules.setBackground(new Color(208, 158, 170));
+        rulesContainer.add(rules);
+
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(15,10, 15, 10);
+
+        GridBagConstraints gbc0 = new GridBagConstraints();
+        gbc0.gridwidth = GridBagConstraints.REMAINDER;
+        gbc0.fill = GridBagConstraints.HORIZONTAL;
+        gbc0.insets = new Insets(0,0, 10, 0);
+
+        nameGame.setHorizontalAlignment(SwingConstants.CENTER);
+        add(nameGame, gbc0);
+        add(rulesContainer, gbc);
+        this.setOpaque(false);
+    }
 }
