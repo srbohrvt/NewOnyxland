@@ -14,17 +14,13 @@ public class OnyxLandGUI {
     public JLabel nameGame;
     private Image background;
 
-    public OnyxLandGUI(int i){
+    public OnyxLandGUI(){
         menuframe=new JFrame("OnyxLand");
 
         //creating backgroung img
         BufferedImage img = null;
         try {
-            if (i == 1)
-                img = ImageIO.read(new File("src/img/background1.jpg"));
-            if (i == 2)
-                img = ImageIO.read(new File("src/img/background2.jpg"));
-
+            img = ImageIO.read(new File("src/img/background2.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -42,17 +38,25 @@ public class OnyxLandGUI {
         menuframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //menuframe.getContentPane().add(nameGame,BorderLayout.NORTH);
 
-        menupanel = new MenuPanel(i);
+        menupanel = new MenuPanel(1);
         menuframe.getContentPane().add(menupanel);
 
         menuframe.setVisible(true);
 
-        if (i == 1) {
+        if (menupanel.newGameButton != null) {
             menupanel.newGameButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    menuframe.dispose();
-                    OnyxLandGUI gui = new OnyxLandGUI(2);
+                    menuframe.getContentPane().removeAll();
+                    menuframe.getContentPane().repaint();
+
+                    menuframe.setSize(500,500);
+                    menuframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+                    menupanel = new MenuPanel(2);
+                    menuframe.getContentPane().add(menupanel);
+
+                    menuframe.setVisible(true);
                 }
             });
             menupanel.exitButton.addActionListener(new ActionListener() {
